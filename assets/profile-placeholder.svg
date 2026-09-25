@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#312e81" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#6366f1" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="480" rx="24" fill="url(#bgGrad)" />
+
+  <!-- Subtle grid lines -->
+  <path d="M 0 120 L 400 120 M 0 240 L 400 240 M 0 360 L 400 360 M 100 0 L 100 480 M 200 0 L 200 480 M 300 0 L 300 480" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+
+  <!-- Central Avatar Glow Circle -->
+  <circle cx="200" cy="190" r="95" fill="url(#glowGrad)" opacity="0.15" filter="url(#shadow)" />
+  <circle cx="200" cy="190" r="82" fill="none" stroke="url(#glowGrad)" stroke-width="2.5" stroke-dasharray="6 4" />
+
+  <!-- Minimalist Stylized Avatar Silhouette -->
+  <!-- Head -->
+  <circle cx="200" cy="165" r="42" fill="url(#accentGrad)" opacity="0.9" />
+  <!-- Body/Shoulders -->
+  <path d="M 125 285 C 125 228, 160 220, 200 220 C 240 220, 275 228, 275 285 Z" fill="url(#accentGrad)" opacity="0.8" />
+
+  <!-- Initials Badge -->
+  <circle cx="200" cy="165" r="28" fill="#0f172a" />
+  <text x="200" y="174" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="800" fill="#ffffff" text-anchor="middle">SF</text>
+
+  <!-- Title Pill -->
+  <rect x="70" y="340" width="260" height="42" rx="21" fill="rgba(255, 255, 255, 0.06)" stroke="rgba(255, 255, 255, 0.12)" />
+  <text x="200" y="366" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="700" fill="#f8fafc" text-anchor="middle">Seminda Fernando</text>
+
+  <!-- Subtitle -->
+  <text x="200" y="412" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">Software Engineering @ SLTC</text>
+
+  <!-- Add photo hint -->
+  <text x="200" y="445" font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#6366f1" text-anchor="middle">📷 Replace with assets/profile.jpg</text>
+</svg>

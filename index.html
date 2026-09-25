@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seminda Fernando | Modern Full-Stack Portfolio</title>
+  <meta name="description" content="Seminda Fernando - Passionate Software Engineering undergraduate who enjoys building modern mobile and web applications, focused on Full-Stack Development.">
+  
+  <!-- Google Fonts Preconnect & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Favicon Icon (Inline SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%236366f1'/><text x='50%' y='68%' font-size='50' font-family='sans-serif' font-weight='800' fill='white' text-anchor='middle'>P</text></svg>">
+</head>
+<body>
+
+  <!-- Background Ambient Glowing Orbs -->
+  <div class="ambient-orb ambient-orb-1"></div>
+  <div class="ambient-orb ambient-orb-2"></div>
+
+  <!-- Interactive Particle Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ========================================================================
+       1. Navigation Bar
+       ======================================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="brand-logo" aria-label="Home">
+        <span class="brand-icon" data-bind="initials">SF</span>
+        <span class="brand-name" data-bind="name">Seminda Fernando</span>
+      </a>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Switcher (Dark / Light) -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light or dark theme">
+          <svg class="theme-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+
+        <a href="#contact" class="btn btn-primary btn-sm">Let's Talk</a>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       2. Hero Section
+       ======================================================================== -->
+  <section class="hero-section" id="home">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span data-bind="status">Available for new opportunities</span>
+        </div>
+
+        <p class="hero-greeting" data-bind="greeting">Hello, I am</p>
+        <h1 class="hero-title"><span class="gradient-text" data-bind="name">Seminda Fernando</span></h1>
+        
+        <div class="hero-typing-wrapper">
+          <span>I'm a</span>
+          <span id="typed-title" class="typed-text"></span>
+        </div>
+
+        <p class="hero-description" data-bind="bio">
+          Passionate Software Engineering undergraduate who enjoys building modern mobile and web applications. I’m focused on Full-Stack Development, creating user-friendly digital experiences, and turning creative ideas into real-world solutions.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#projects" class="btn btn-primary">
+            <span>Explore Work</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#" id="btn-download-cv" class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Download CV</span>
+          </a>
+        </div>
+
+        <div class="hero-socials">
+          <a href="#" id="link-github" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          </a>
+          <a href="#" id="link-linkedin" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+          <a href="#" id="link-twitter" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X Profile">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+          </a>
+          <a href="#" id="link-email" class="social-link" aria-label="Email Me">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual Code Card -->
+      <div class="hero-visual">
+        <div class="hero-code-card">
+          <div class="code-header">
+            <div class="code-dots">
+              <span class="code-dot dot-red"></span>
+              <span class="code-dot dot-yellow"></span>
+              <span class="code-dot dot-green"></span>
+            </div>
+            <span class="code-title">developer.config.ts</span>
+            <span style="font-size: 0.75rem; color: var(--accent-emerald);">● live</span>
+          </div>
+          <pre class="code-body"><code><span class="code-line"><span class="token-keyword">const</span> <span class="token-variable">developer</span> = {</span>
+<span class="code-line">  <span class="token-property">name</span>: <span class="token-string">'Seminda Fernando'</span>,</span>
+<span class="code-line">  <span class="token-property">education</span>: <span class="token-string">'SLTC Undergraduate'</span>,</span>
+<span class="code-line">  <span class="token-property">focus</span>: [<span class="token-string">'Mobile Apps'</span>, <span class="token-string">'Web Dev'</span>, <span class="token-string">'Full-Stack'</span>],</span>
+<span class="code-line">  <span class="token-property">passion</span>: <span class="token-string">'Turning Ideas Into Reality'</span>,</span>
+<span class="code-line">  <span class="token-property">build</span>: () =&gt; {</span>
+<span class="code-line">    <span class="token-keyword">return</span> <span class="token-string">'Innovative Digital Solutions'</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line">};</span></code></pre>
+        </div>
+
+        <div class="floating-stat-badge">
+          <div class="floating-badge-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <div>
+            <div class="floating-badge-val">100%</div>
+            <div class="floating-badge-lbl">Uptime & Reliability</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       3. About Section
+       ======================================================================== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">About Me</span>
+        <h2 class="section-title">Software Engineering Undergraduate @ SLTC</h2>
+        <p class="section-subtitle">Dedicated to creating functional, scalable, and user-centric digital applications.</p>
+      </div>
+
+      <div class="about-grid">
+        <!-- Left: Profile Photo Column -->
+        <div class="about-image-column">
+          <div class="about-photo-wrapper">
+            <div class="about-photo-glow"></div>
+            <div class="about-photo-frame glass-card">
+              <img src="DSC04437.jpg.jpeg" alt="Seminda Fernando" class="about-photo-img" id="about-profile-img" onerror="this.onerror=null; this.src='assets/profile-placeholder.svg';">
+              <div class="about-photo-badge">
+                <span class="about-photo-dot"></span>
+                <span>SLTC Undergraduate</span>
+              </div>
+            </div>
+
+            <!-- Floating Badge -->
+            <div class="about-floating-card glass-card">
+              <div class="about-floating-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 0.95rem;">Software Engineering</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">SLTC Research University</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Story & Details Column -->
+        <div class="about-text">
+          <p>
+            I’m a Software Engineering undergraduate at SLTC with a passion for building innovative and user-friendly digital solutions. My main interests are Mobile App Development, Web Development, and Full-Stack Development.
+          </p>
+          <p>
+            I enjoy turning ideas into functional applications and exploring different technologies to solve real-world problems. I’m particularly interested in developing responsive interfaces, creating efficient backend systems, working with databases, and delivering smooth user experiences.
+          </p>
+          <p>
+            As I continue my journey in software engineering, I’m constantly learning new technologies, improving my programming and problem-solving skills, and working on projects that allow me to gain practical experience. I’m always open to new challenges, collaboration, and opportunities to grow as a developer.
+          </p>
+
+          <!-- Core Interests Pills -->
+          <div class="about-interests-group">
+            <div class="about-interests-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              Primary Interests &amp; Focus Areas
+            </div>
+            <div class="about-interests-pills">
+              <span class="interest-pill">📱 Mobile App Development</span>
+              <span class="interest-pill">🌐 Web Development</span>
+              <span class="interest-pill">⚡ Full-Stack Systems</span>
+              <span class="interest-pill">🎨 Responsive UI/UX</span>
+              <span class="interest-pill">🗄️ Databases &amp; APIs</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+            <a href="#contact" class="btn btn-primary">
+              <span>Get In Touch</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+            <a href="#projects" class="btn btn-secondary">
+              <span>View Projects</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. Skills & Tech Stack Section
+       ======================================================================== -->
+  <section class="section" id="skills" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Technical Arsenal</span>
+        <h2 class="section-title">Skills & Technologies</h2>
+        <p class="section-subtitle">A curated toolkit of languages, frameworks, and cloud utilities I leverage daily.</p>
+      </div>
+
+      <div class="skills-container" id="skills-container">
+        <!-- Dynamic Skill Groups Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. Featured Projects Section
+       ======================================================================== -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Portfolio Showcase</span>
+        <h2 class="section-title">Featured Works & Case Studies</h2>
+        <p class="section-subtitle">A collection of select production applications, open-source utilities, and UI experiments.</p>
+      </div>
+
+      <!-- Category Filter Bar -->
+      <div class="projects-filter-bar">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+        <button class="filter-btn" data-filter="mobile">Mobile / PWA</button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projects-container">
+        <!-- Dynamic Project Cards Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. Experience & Education Timeline
+       ======================================================================== -->
+  <section class="section" id="experience" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Career History</span>
+        <h2 class="section-title">Experience & Education</h2>
+        <p class="section-subtitle">My professional journey and key engineering milestones.</p>
+      </div>
+
+      <div class="timeline-container" id="timeline-container">
+        <!-- Dynamic Timeline Items Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. Contact Section
+       ======================================================================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Let's Connect</span>
+        <h2 class="section-title">Have A Project In Mind?</h2>
+        <p class="section-subtitle">I'm currently available for freelance inquiries, contract work, and full-time engineering roles.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Left: Contact Details Card -->
+        <div class="glass-card contact-info-card">
+          <div class="contact-intro">
+            <h3>Let's start a conversation</h3>
+            <p>
+              Feel free to reach out directly via email, message me on social platforms, or submit the contact form. I typically respond within 24 hours.
+            </p>
+          </div>
+
+          <div class="contact-methods">
+            <div class="contact-method-item">
+              <div class="method-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <div style="flex-grow: 1;">
+                <div class="method-title">Direct Email</div>
+                <div class="method-value" id="copy-email-text" data-bind="email">seminda.fernando@example.com</div>
+              </div>
+              <button class="copy-btn" data-copy-target="#copy-email-text" title="Copy Email" aria-label="Copy Email">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+            </div>
+
+            <div class="contact-method-item">
+              <div class="method-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div style="flex-grow: 1;">
+                <div class="method-title">Phone</div>
+                <div class="method-value" id="copy-phone-text" data-bind="phone">+1 (555) 234-5678</div>
+              </div>
+              <button class="copy-btn" data-copy-target="#copy-phone-text" title="Copy Phone Number" aria-label="Copy Phone Number">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+            </div>
+
+            <div class="contact-method-item">
+              <div class="method-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+              <div>
+                <div class="method-title">Location</div>
+                <div class="method-value" data-bind="location">San Francisco, CA (Open to Remote)</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+            <span style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.75rem;">Follow & Connect:</span>
+            <div class="hero-socials">
+              <a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+              <a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+              <a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Contact Form -->
+        <div class="glass-card contact-form-card">
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="contact-name" class="form-label">Your Name *</label>
+                <input type="text" id="contact-name" class="form-control" placeholder="e.g. Jane Doe" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-email" class="form-label">Your Email *</label>
+                <input type="email" id="contact-email" class="form-control" placeholder="e.g. jane@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-subject" class="form-label">Subject</label>
+              <input type="text" id="contact-subject" class="form-control" placeholder="e.g. Project Inquiry / Full-time role">
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message" class="form-label">Message *</label>
+              <textarea id="contact-message" class="form-control" placeholder="Tell me a bit about your project or inquiry..." required></textarea>
+            </div>
+
+            <button type="submit" id="contact-submit-btn" class="btn btn-primary" style="align-self: flex-start;">
+              <span>Send Message</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       8. Footer
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <a href="#home" class="brand-logo">
+          <span class="brand-icon" data-bind="initials">SF</span>
+          <span class="brand-name" data-bind="name">Seminda Fernando</span>
+        </a>
+
+        <div style="display: flex; gap: 1.5rem; font-size: 0.9rem;">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#experience" class="nav-link">Experience</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+
+        <p class="footer-copy">
+          &copy; <span id="current-year">2026</span> <span data-bind="name">Seminda Fernando</span>. All rights reserved.
+        </p>
+      </div>
+
+      <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+        Crafted with modern semantic HTML5, CSS3 Custom Properties &amp; Vanilla JavaScript.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Scroll back to top">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <!-- ========================================================================
+       9. Project Details Modal Window
+       ======================================================================== -->
+  <div class="modal-backdrop" id="project-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div id="modal-project-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/portfolio-data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
