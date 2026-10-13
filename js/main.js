@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let height = (canvas.height = window.innerHeight);
 
     let particles = [];
-    const particleCount = Math.min(Math.floor((width * height) / 18000), 55);
+    const isMobile = window.innerWidth < 768;
+    const particleCount = Math.min(Math.floor((width * height) / 22000), isMobile ? 22 : 55);
 
     const mouse = { x: null, y: null, radius: 120 };
 
@@ -299,15 +300,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     projectsContainer.innerHTML = filtered.map(p => `
       <article class="glass-card project-card" data-id="${p.id}">
-        <div class="project-thumbnail" style="background: ${p.gradient}">
-          <div style="font-size: 2.5rem; color: rgba(255,255,255,0.85); font-weight: 800;">
+        <div class="project-thumbnail view-project-btn" data-id="${p.id}" role="button" tabindex="0" aria-label="View details for ${p.title}" style="background: ${p.gradient}; cursor: pointer;">
+          <div class="project-thumbnail-title">
             ${p.title.split(' ')[0]}
           </div>
           <div class="project-thumbnail-overlay">
-            <button class="btn btn-sm btn-primary view-project-btn" data-id="${p.id}">
+            <span class="btn btn-sm btn-primary">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
               Quick View
-            </button>
+            </span>
           </div>
         </div>
         <div class="project-body">
@@ -315,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="project-category">${p.categoryLabel || p.category}</span>
             <span class="tech-tag" style="background: var(--accent-gradient-subtle); color: var(--accent-primary);">${p.badge || 'Live'}</span>
           </div>
-          <h3 class="project-title">${p.title}</h3>
+          <h3 class="project-title view-project-btn" data-id="${p.id}" style="cursor: pointer;">${p.title}</h3>
           <p class="project-desc">${p.description}</p>
           <div class="project-tech-stack">
             ${p.techStack.map(t => `<span class="tech-tag">${t}</span>`).join('')}
@@ -329,16 +330,27 @@ document.addEventListener('DOMContentLoaded', () => {
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
               <span>Source</span>
             </a>
+            <button type="button" class="project-action-link view-project-btn project-details-btn" data-id="${p.id}">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <span>Info</span>
+            </button>
           </div>
         </div>
       </article>
     `).join('');
 
-    // Attach click listeners for quick view
+    // Attach click and key listeners for quick view
     document.querySelectorAll('.view-project-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const id = e.currentTarget.getAttribute('data-id');
         openProjectModal(id);
+      });
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const id = e.currentTarget.getAttribute('data-id');
+          openProjectModal(id);
+        }
       });
     });
   }
@@ -390,24 +402,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!p || !modalBackdrop || !modalBody) return;
 
     modalBody.innerHTML = `
-      <div style="margin-bottom: 1.5rem; height: 180px; border-radius: 14px; background: ${p.gradient}; display: flex; align-items: center; justify-content: center;">
-        <span style="font-size: 2.2rem; font-weight: 800; color: #fff;">${p.title}</span>
+      <div class="modal-banner" style="margin-bottom: 1.5rem; height: 160px; border-radius: 14px; background: ${p.gradient}; display: flex; align-items: center; justify-content: center; padding: 1rem; text-align: center;">
+        <span style="font-size: clamp(1.25rem, 4vw, 2rem); font-weight: 800; color: #fff; line-height: 1.2;">${p.title}</span>
       </div>
       <span class="project-category">${p.categoryLabel || p.category}</span>
-      <h2 style="margin: 0.5rem 0 1rem; font-size: 1.75rem;">${p.title}</h2>
-      <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">${p.details || p.description}</p>
+      <h2 style="margin: 0.5rem 0 1rem; font-size: clamp(1.25rem, 3.5vw, 1.75rem);">${p.title}</h2>
+      <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem; font-size: 0.95rem;">${p.details || p.description}</p>
       
-      <h4 style="margin-bottom: 0.75rem; font-size: 1rem;">Technologies Used:</h4>
+      <h4 style="margin-bottom: 0.75rem; font-size: 0.95rem;">Technologies Used:</h4>
       <div class="project-tech-stack" style="margin-bottom: 2rem;">
         ${p.techStack.map(t => `<span class="tech-tag" style="background: var(--bg-tertiary); padding: 0.35rem 0.8rem; font-size: 0.85rem;">${t}</span>`).join('')}
       </div>
 
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="${p.demoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="flex: 1;">
+      <div class="modal-actions" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="${p.demoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="flex: 1; min-width: 140px;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           Visit Live Demo
         </a>
-        <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="flex: 1;">
+        <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="flex: 1; min-width: 140px;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
           View Source Code
         </a>
@@ -580,19 +592,56 @@ document.addEventListener('DOMContentLoaded', () => {
      -------------------------------------------------------------------------- */
   const mobileToggle = document.getElementById('mobile-toggle');
   const navMenu = document.getElementById('nav-links');
+  const navBackdrop = document.getElementById('nav-backdrop');
+
+  function openMobileMenu() {
+    mobileToggle.classList.add('active');
+    navMenu.classList.add('active');
+    mobileToggle.setAttribute('aria-expanded', 'true');
+    if (navBackdrop) navBackdrop.classList.add('active');
+    document.body.classList.add('nav-open');
+  }
+
+  function closeMobileMenu() {
+    mobileToggle.classList.remove('active');
+    navMenu.classList.remove('active');
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    if (navBackdrop) navBackdrop.classList.remove('active');
+    document.body.classList.remove('nav-open');
+  }
 
   if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      mobileToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navMenu.classList.contains('active');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
     });
 
-    // Close mobile menu when clicking any nav link
-    navMenu.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-      });
+    if (navBackdrop) {
+      navBackdrop.addEventListener('click', closeMobileMenu);
+    }
+
+    // Close mobile menu when clicking any nav link or cta
+    navMenu.querySelectorAll('.nav-link, .nav-mobile-cta').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close mobile menu on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Reset when resizing past mobile breakpoint
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+        closeMobileMenu();
+      }
     });
   }
 });
