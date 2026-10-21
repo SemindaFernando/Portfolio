@@ -31,7 +31,7 @@ const portfolioData = {
       "Backend & Databases"
     ],
     photoUrl: "Seminda .png",
-    location: "Sri Lanka (Open to Remote & Global Opportunities)",
+    location: "Galle, Sri Lanka (Open to Remote)",
     email: "semindadewruwan2003@gmail.com",
     phone: "+94 76 465 1136",
     status: "Open to Collaborations & Opportunities",
@@ -39,7 +39,6 @@ const portfolioData = {
     socials: {
       github: "https://github.com/SemindaFernando",
       linkedin: "https://www.linkedin.com/in/semindafernando/",
-      twitter: "https://twitter.com",
       email: "semindadewruwan2003@gmail.com"
     }
   },
@@ -78,36 +77,81 @@ const portfolioData = {
 
   // Skills & Technologies
   skills: [
-    {
-      category: "Frontend Development",
-      items: [
-        { name: "JavaScript (ES6+)", level: "Expert" },
-        { name: "TypeScript", level: "Advanced" },
-        { name: "HTML5 & CSS3", level: "Expert" },
-        { name: "React.js / Next.js", level: "Advanced" },
-        { name: "Tailwind CSS", level: "Expert" },
-      ]
-    },
-    {
-      category: "Backend & Database",
-      items: [
-        { name: "Node.js & Express", level: "Advanced" },
-        { name: "JavaScript", level: "Intermediate" },
-        { name: "PostgreSQL", level: "Advanced" },
-        { name: "Firebase / Firestore", level: "Advanced" },
-        { name: "REST & GraphQL APIs", level: "Expert" }
-      ]
-    },
-    {
-      category: "DevOps, Tools & AI",
-      items: [
-        { name: "Git & GitHub Actions", level: "Expert" },
-        { name: "Docker", level: "Intermediate" },
-        { name: "AWS / Vercel / Cloudflare", level: "Advanced" },
-        { name: "Figma", level: "Advanced" },
-      ]
-    }
-  ],
+  {
+    category: "Programming Languages",
+    items: [
+      { name: "JavaScript (ES6+)", level: "Advanced" },
+      { name: "TypeScript", level: "Intermediate" },
+      { name: "Java", level: "Intermediate" },
+      { name: "Python", level: "Intermediate" },
+      { name: "C", level: "Intermediate" },
+      { name: "SQL", level: "Intermediate" }
+    ]
+  },
+  {
+    category: "Frontend Development",
+    items: [
+      { name: "HTML5 & CSS3", level: "Advanced" },
+      { name: "React.js", level: "Intermediate" },
+      { name: "Next.js", level: "Beginner" },
+      { name: "Tailwind CSS", level: "Intermediate" }
+    ]
+  },
+  {
+    category: "Mobile App Development",
+    items: [
+      { name: "React Native", level: "Intermediate" },
+      { name: "Expo", level: "Intermediate" },
+      { name: "Expo Router", level: "Intermediate" },
+      { name: "Android Studio", level: "Intermediate" }
+    ]
+  },
+  {
+    category: "Backend Development",
+    items: [
+      { name: "Node.js", level: "Intermediate" },
+      { name: "Express.js", level: "Beginner" },
+      { name: "REST API Development", level: "Intermediate" },
+    ]
+  },
+  {
+    category: "Database & Backend Services",
+    items: [
+      { name: "PostgreSQL", level: "Beginner" },
+      { name: "Firebase", level: "Intermediate" },
+      { name: "Cloud Firestore", level: "Intermediate" }
+    ]
+  },
+  {
+    category: "DevOps, Deployment & Tools",
+    items: [
+      { name: "Git & GitHub", level: "Advanced" },
+      { name: "GitHub Actions", level: "Beginner" },
+      { name: "Vercel", level: "Intermediate" },
+      { name: "VS Code", level: "Advanced" }
+    ]
+  },
+  {
+    category: "UI/UX & Design Tools",
+    items: [
+      { name: "Figma", level: "Intermediate" },
+      { name: "Adobe Photoshop", level: "Intermediate" },
+      { name: "Adobe Lightroom", level: "Intermediate" },
+      { name: "Canva", level: "Advanced" }
+    ]
+  },
+  {
+    category: "AI & Data Science",
+    items: [
+      { name: "Pandas", level: "Intermediate" },
+      { name: "NumPy", level: "Intermediate" },
+      { name: "XGBoost", level: "Beginner" },
+      { name: "SHAP (Explainable AI)", level: "Beginner" },
+      { name: "Jupyter Notebook", level: "Intermediate" }
+    ]
+  }
+],
+
 
   // Featured Portfolio Projects
   projects: [
@@ -153,8 +197,9 @@ const portfolioData = {
     {
       id: "xai-vehicle-failure-3d",
       title: "XAI Vehicle Failure Management - Toyota Aqua",
-      category: "ai-ml",
+      category: "fullstack",
       categoryLabel: "fullstack",
+      status: "Ongoing",
       description: "(Ongoing Project) Explainable AI framework that turns black-box engine fault predictions into role-specific alerts and an interactive 3D visualization of the affected engine component.",
       details: "Predicts engine overheating and low oil pressure faults for the Toyota Aqua (Prius C) using Random Forest and XGBoost trained on synthetic fault sequences. SHAP and LIME explanations are adapted for drivers, technicians, and technically oriented users, then mapped to cooling and lubrication components in a Three.js 3D engine simulation. Evaluated through a user study (SUS, trust, decision accuracy, response time) against traditional text-based warnings.",
       techStack: ["Python", "Random Forest", "XGBoost", "SHAP", "LIME", "Flask", "Three.js", "Blender"],
@@ -166,8 +211,9 @@ const portfolioData = {
     {
       id: "bike-parts-pos",
       title: "MotoParts POS - Bike Shop Management System",
-      category: "desktop",
+      category: "fullstack",
       categoryLabel: "fullstack",
+      status: "Ongoing",
       description: "(Ongoing Project) Complete point-of-sale system for a motorcycle parts shop with inventory tracking, fast billing, credit sales management and daily sales reports.",
       details: "Built for a real client to replace manual bill books. Includes part number and bike model search, low stock alerts, supplier purchases (GRN), customer credit tracking, thermal receipt printing, barcode scanning, role-based login (owner / cashier) and automatic daily database backups. Packaged as a Windows installer so the shop needs no extra setup.",
       techStack: ["Java", "JavaFX", "Spring Boot", "MySQL", "JDBC"],
@@ -181,23 +227,47 @@ const portfolioData = {
   // Career Experience & Education Timeline
   timeline: [
     {
-      period: "2023-Present",
-      role: "BSc (Hons) in Software Engineering Student",
-      company: "SLTC Research University",
-      description: "Currently pursuing a BSc (Hons) in Software Engineering at SLTC Research University, developing skills in software development, mobile applications, and modern web technologies.",
-      achievements: [
-        "Building practical experience through academic projects and personal software development projects.",
-        "Exploring full-stack development, mobile application development, and AI-powered solutions."
-      ]
-    },
+  label: "Higher Education",
+  period: "2023 - Present",
+  role: "BSc (Hons) in Software Engineering Student",
+  company: "SLTC Research University",
+  description: "Currently pursuing a BSc (Hons) in Software Engineering, building knowledge in software development, mobile applications, and modern web technologies.",
+
+  achievements: [
+    "Building practical experience through academic and personal software development projects.",
+    "Exploring full-stack development, mobile application development, and AI-powered solutions."
+  ],
+
+  extracurricular: {
+    title: "Extracurricular Activities",
+    organization: "SLTC Media Unit",
+    activities: [
+      {
+        role: "Vice President",
+        period: "July 2026 - Present"
+      },
+      {
+        role: "Deputy Head Of Photography",
+        period: "May 2025 - July 2026"
+      },
+      {
+        role: "Member of Photography Committee",
+        period: "October 2023 - August 2025"
+      }
+    ]
+  }
+},
+    
     {
+      label: "School Education",
       period: "2012-2021",
       role: "Student",
       company: "G/Karandeniya Central Collage",
       description: "Completed school education from 2012 to 2021, including the G.C.E. Ordinary Level and Advanced Level examinations.",
       achievements: [
+                      "Completed the G.C.E. Advanced Level (A/L) examination in 2021 under the Technology stream.",
                       "Completed G.C.E. Ordinary Level (O/L) examination in 2018.",
-                      "Completed G.C.E. Advanced Level (A/L) examination in 2021."
+                      
 ]
       
     }

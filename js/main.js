@@ -262,6 +262,93 @@ document.addEventListener('DOMContentLoaded', () => {
     `).join('');
   }
 
+  /* --------------------------------------------------------------------------
+     Helper: Technology / Programming Language Logos
+     -------------------------------------------------------------------------- */
+  function getSkillLogo(name, customIcon) {
+    if (customIcon) return customIcon;
+    const n = (name || '').toLowerCase().trim();
+
+    // Programming Languages
+    if (n.includes('javascript') || n === 'js') return '<i class="devicon-javascript-plain colored"></i>';
+    if (n.includes('typescript') || n === 'ts') return '<i class="devicon-typescript-plain colored"></i>';
+    if (n.includes('java') && !n.includes('javascript')) return '<i class="devicon-java-plain colored"></i>';
+    if (n.includes('python')) return '<i class="devicon-python-plain colored"></i>';
+    if (n === 'c' || n.startsWith('c ') || n === 'c language') return '<i class="devicon-c-plain colored"></i>';
+    if (n.includes('c++') || n.includes('cpp')) return '<i class="devicon-cplusplus-plain colored"></i>';
+    if (n.includes('c#') || n.includes('csharp')) return '<i class="devicon-csharp-plain colored"></i>';
+    if (n.includes('dart')) return '<i class="devicon-dart-plain colored"></i>';
+    if (n.includes('kotlin')) return '<i class="devicon-kotlin-plain colored"></i>';
+    if (n.includes('swift')) return '<i class="devicon-swift-plain colored"></i>';
+    if (n.includes('php')) return '<i class="devicon-php-plain colored"></i>';
+    if (n.includes('ruby')) return '<i class="devicon-ruby-plain colored"></i>';
+    if (n.includes('rust')) return '<i class="devicon-rust-plain colored"></i>';
+    if (n.includes('go') || n.includes('golang')) return '<i class="devicon-go-original-wordmark colored"></i>';
+
+    // Frontend Frameworks & Libraries
+    if (n.includes('html')) return '<i class="devicon-html5-plain colored"></i>';
+    if (n.includes('css') && !n.includes('tailwind')) return '<i class="devicon-css3-plain colored"></i>';
+    if (n.includes('tailwind')) return '<i class="devicon-tailwindcss-original colored"></i>';
+    if (n.includes('react native')) return '<i class="devicon-react-original colored"></i>';
+    if (n.includes('react')) return '<i class="devicon-react-original colored"></i>';
+    if (n.includes('next')) return '<i class="devicon-nextjs-plain"></i>';
+    if (n.includes('vue')) return '<i class="devicon-vuejs-plain colored"></i>';
+    if (n.includes('angular')) return '<i class="devicon-angularjs-plain colored"></i>';
+    if (n.includes('bootstrap')) return '<i class="devicon-bootstrap-plain colored"></i>';
+    if (n.includes('sass')) return '<i class="devicon-sass-original colored"></i>';
+
+    // Mobile Development
+    if (n.includes('expo')) {
+      return '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9.9 5.4c.3-.5.8-.8 1.4-.8.6 0 1.1.3 1.4.8l8.6 14.5c.3.5.3 1.1 0 1.6-.3.5-.8.8-1.4.8H2.8c-.6 0-1.1-.3-1.4-.8-.3-.5-.3-1.1 0-1.6L9.9 5.4zM11.3 8L4.6 19.5h13.5L11.3 8z"/></svg>';
+    }
+    if (n.includes('android')) return '<i class="devicon-androidstudio-plain colored"></i>';
+    if (n.includes('flutter')) return '<i class="devicon-flutter-plain colored"></i>';
+
+    // Backend & Runtime
+    if (n.includes('node')) return '<i class="devicon-nodejs-plain colored"></i>';
+    if (n.includes('express')) return '<i class="devicon-express-original"></i>';
+    if (n.includes('api') || n.includes('rest')) {
+      return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><polyline points="7 8 10 10 7 12"/><line x1="13" y1="12" x2="17" y2="12"/></svg>';
+    }
+
+    // Databases & Cloud
+    if (n.includes('postgres')) return '<i class="devicon-postgresql-plain colored"></i>';
+    if (n.includes('mysql') || n.includes('sql')) return '<i class="devicon-mysql-plain colored"></i>';
+    if (n.includes('sqlite')) return '<i class="devicon-sqlite-plain colored"></i>';
+    if (n.includes('mongodb') || n.includes('mongo')) return '<i class="devicon-mongodb-plain colored"></i>';
+    if (n.includes('redis')) return '<i class="devicon-redis-plain colored"></i>';
+    if (n.includes('firebase') || n.includes('firestore')) return '<i class="devicon-firebase-plain colored"></i>';
+    if (n.includes('aws') || n.includes('amazon')) return '<i class="devicon-amazonwebservices-plain-wordmark colored"></i>';
+
+    // DevOps & Tools
+    if (n.includes('github actions')) return '<i class="devicon-githubactions-plain colored"></i>';
+    if (n.includes('git') || n.includes('github')) return '<i class="devicon-github-original"></i>';
+    if (n.includes('docker')) return '<i class="devicon-docker-plain colored"></i>';
+    if (n.includes('vercel')) return '<i class="devicon-vercel-original"></i>';
+    if (n.includes('vscode') || n.includes('vs code')) return '<i class="devicon-vscode-plain colored"></i>';
+
+    // Design Tools
+    if (n.includes('figma')) return '<i class="devicon-figma-plain colored"></i>';
+    if (n.includes('photoshop')) return '<i class="devicon-photoshop-plain colored"></i>';
+    if (n.includes('lightroom')) {
+      return '<svg viewBox="0 0 24 24" width="18" height="18"><rect width="24" height="24" rx="4" fill="#001e36"/><text x="4.5" y="16.5" font-family="sans-serif" font-weight="900" font-size="11" fill="#31a8ff">Lr</text></svg>';
+    }
+    if (n.includes('canva')) return '<i class="devicon-canva-original colored"></i>';
+
+    // AI & Data Science
+    if (n.includes('pandas')) return '<i class="devicon-pandas-plain colored"></i>';
+    if (n.includes('numpy')) return '<i class="devicon-numpy-plain colored"></i>';
+    if (n.includes('jupyter')) return '<i class="devicon-jupyter-plain colored"></i>';
+    if (n.includes('xgboost')) {
+      return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#f97316" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8.5" y1="7.5" x2="10.5" y2="15.5"/><line x1="15.5" y1="7.5" x2="13.5" y2="15.5"/></svg>';
+    }
+    if (n.includes('shap')) {
+      return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#a855f7" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>';
+    }
+
+    return '<span class="skill-icon-dot"></span>';
+  }
+
   // Render Skills
   const skillsContainer = document.getElementById('skills-container');
   if (skillsContainer && data.skills) {
@@ -280,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="skill-items-grid">
           ${cat.items.map(item => `
             <div class="skill-pill" title="Proficiency: ${item.level}">
-              <span class="skill-icon-dot"></span>
+              <span class="skill-logo">${getSkillLogo(item.name, item.icon)}</span>
               <span>${item.name}</span>
             </div>
           `).join('')}
@@ -290,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Render Projects
-  const projectsContainer = document.getElementById('projects-container');
+    const projectsContainer = document.getElementById('projects-container');
   function renderProjects(filterCategory = 'all') {
     if (!projectsContainer || !data.projects) return;
 
@@ -308,6 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
               ${p.title.split(' ')[0]}
             </div>
           `}
+          ${p.status ? `<span class="project-status-label"><span class="project-status-dot"></span>${p.status}</span>` : ''}
           <div class="project-thumbnail-overlay">
             <span class="btn btn-sm btn-primary">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -375,25 +463,42 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Render Timeline
-  const timelineContainer = document.getElementById('timeline-container');
-  if (timelineContainer && data.timeline) {
-    timelineContainer.innerHTML = data.timeline.map(item => `
-      <div class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="glass-card timeline-content">
-          <div class="timeline-header">
-            <h3 class="timeline-role">${item.role}</h3>
-            <span class="timeline-period">${item.period}</span>
-          </div>
-          <div class="timeline-company">${item.company}</div>
-          <p class="timeline-desc">${item.description}</p>
-          <ul class="timeline-achievements">
-            ${item.achievements.map(ach => `<li>${ach}</li>`).join('')}
-          </ul>
+ // Render Timeline
+const timelineContainer = document.getElementById('timeline-container');
+if (timelineContainer && data.timeline) {
+  timelineContainer.innerHTML = data.timeline.map(item => `
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="glass-card timeline-content">
+        ${item.label ? `<span class="timeline-label">${item.label}</span>` : ''}
+        <div class="timeline-header">
+          <h3 class="timeline-role">${item.role}</h3>
+          <span class="timeline-period">${item.period}</span>
         </div>
+        <div class="timeline-company">${item.company}</div>
+        <p class="timeline-desc">${item.description}</p>
+
+        ${item.achievements && item.achievements.length ? `
+        <ul class="timeline-achievements">
+          ${item.achievements.map(ach => `<li>${ach}</li>`).join('')}
+        </ul>` : ''}
+
+        ${item.extracurricular ? `
+        <div class="timeline-extra">
+          <h4 class="timeline-extra-title">${item.extracurricular.title}</h4>
+          <div class="timeline-extra-org">${item.extracurricular.organization}</div>
+          <ul class="timeline-extra-list">
+            ${item.extracurricular.activities.map(a => `
+              <li>
+                <span class="extra-role">${a.role}</span>
+                <span class="extra-period">${a.period}</span>
+              </li>`).join('')}
+          </ul>
+        </div>` : ''}
       </div>
-    `).join('');
-  }
+    </div>
+  `).join('');
+}
 
   /* --------------------------------------------------------------------------
      5. Project Details Modal
