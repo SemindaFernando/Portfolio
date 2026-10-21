@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       draw() {
         const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-        ctx.fillStyle = isDark ? 'rgba(129, 140, 248, 0.45)' : 'rgba(99, 102, 241, 0.35)';
+        ctx.fillStyle = isDark ? 'rgba(56, 189, 248, 0.5)' : 'rgba(0, 0, 137, 0.45)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -128,8 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
           if (distance < 130) {
             const opacity = (1 - distance / 130) * 0.2;
             ctx.strokeStyle = isDark
-              ? `rgba(99, 102, 241, ${opacity})`
-              : `rgba(99, 102, 241, ${opacity * 0.7})`;
+              ? `rgba(37, 99, 235, ${opacity * 1.3})`
+              : `rgba(0, 0, 137, ${opacity})`;
             ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);

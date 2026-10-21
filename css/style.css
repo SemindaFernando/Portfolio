@@ -9,33 +9,34 @@
    -------------------------------------------------------------------------- */
 :root {
   /* Color Palette - Dark Mode (Default) */
-  --bg-primary: #090d16;
-  --bg-secondary: #0f172a;
-  --bg-tertiary: #1e293b;
-  --bg-card: rgba(15, 23, 42, 0.75);
-  --bg-card-hover: rgba(30, 41, 59, 0.85);
-  --bg-glass: rgba(15, 23, 42, 0.65);
+  --bg-primary: #030712;
+  --bg-secondary: #070d24;
+  --bg-tertiary: #0e1738;
+  --bg-card: rgba(8, 14, 38, 0.78);
+  --bg-card-hover: rgba(16, 26, 64, 0.88);
+  --bg-glass: rgba(8, 14, 38, 0.68);
   --border-color: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(99, 102, 241, 0.4);
+  --border-hover: rgba(0, 0, 137, 0.65);
   
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   
   /* Brand Accent Gradients */
-  --accent-primary: #6366f1;       /* Indigo */
-  --accent-secondary: #8b5cf6;     /* Violet */
-  --accent-cyan: #06b6d4;          /* Cyan */
+  --accent-primary: #2563eb;       /* Royal Blue */
+  --brand-navy: #000089;
+  --accent-secondary: #1d4ed8;     /* Deep Royal Blue */
+  --accent-cyan: #38bdf8;          /* Bright Sky Blue */
   --accent-emerald: #10b981;       /* Emerald */
-  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
-  --accent-gradient-subtle: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
-  --accent-glow: rgba(99, 102, 241, 0.35);
+  --accent-gradient: linear-gradient(135deg, #000089 0%, #1d4ed8 50%, #38bdf8 100%);
+  --accent-gradient-subtle: linear-gradient(135deg, rgba(0, 0, 137, 0.35), rgba(29, 78, 216, 0.18));
+  --accent-glow: rgba(0, 0, 137, 0.5);
   
   /* Shadows & Depth */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.3);
+  --shadow-glow: 0 0 25px rgba(0, 0, 137, 0.45);
   
   /* Layout & Geometry */
   --container-max: 1200px;
@@ -60,7 +61,14 @@
   --bg-card-hover: rgba(255, 255, 255, 0.95);
   --bg-glass: rgba(255, 255, 255, 0.75);
   --border-color: rgba(15, 23, 42, 0.08);
-  --border-hover: rgba(99, 102, 241, 0.5);
+  --border-hover: rgba(0, 0, 137, 0.5);
+  
+  --accent-primary: #000089;
+  --accent-secondary: #1d4ed8;
+  --accent-cyan: #0284c7;
+  --accent-gradient: linear-gradient(135deg, #000089 0%, #1e40af 60%, #0284c7 100%);
+  --accent-gradient-subtle: linear-gradient(135deg, rgba(0, 0, 137, 0.12), rgba(30, 64, 175, 0.08));
+  --accent-glow: rgba(0, 0, 137, 0.3);
   
   --text-primary: #0f172a;
   --text-secondary: #475569;
@@ -69,7 +77,7 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 20px 35px -10px rgba(0, 0, 0, 0.12);
-  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.2);
+  --shadow-glow: 0 0 20px rgba(0, 0, 137, 0.25);
 }
 
 /* --------------------------------------------------------------------------
@@ -123,7 +131,7 @@ body {
 .ambient-orb-1 {
   width: 500px;
   height: 500px;
-  background: var(--accent-primary);
+  background: var(--brand-navy);
   top: -100px;
   right: -100px;
 }
@@ -244,12 +252,12 @@ img {
 .btn-primary {
   background: var(--accent-gradient);
   color: #ffffff;
-  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 137, 0.35);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.55);
+  box-shadow: 0 8px 30px rgba(0, 0, 137, 0.55);
 }
 
 .btn-secondary {
@@ -347,7 +355,7 @@ img {
   color: #fff;
   font-weight: 800;
   font-size: 1.1rem;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 137, 0.4);
 }
 @font-face {
   font-family: 'Drupadi';
@@ -635,10 +643,10 @@ img {
 
 .social-link:hover {
   color: #fff;
-  background: var(--accent-primary);
+  background: var(--brand-navy);
   border-color: var(--accent-primary);
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 6px 15px rgba(0, 0, 137, 0.4);
 }
 
 .social-icon {
@@ -908,7 +916,7 @@ img {
 }
 
 .interest-pill:hover {
-  background: var(--accent-primary);
+  background: var(--brand-navy);
   color: #fff;
   transform: translateY(-2px);
 }
@@ -1057,7 +1065,7 @@ img {
   border-color: var(--accent-primary);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 137, 0.25);
 }
 
 .skill-logo {
@@ -1100,7 +1108,7 @@ img {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent-primary);
+  background: var(--brand-navy);
 }
 
 /* --------------------------------------------------------------------------
@@ -1133,10 +1141,10 @@ img {
 }
 
 .filter-btn.active {
-  background: var(--accent-primary);
+  background: var(--brand-navy);
   color: #ffffff;
   border-color: var(--accent-primary);
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 137, 0.4);
 }
 
 .projects-grid {
@@ -1325,7 +1333,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 10px rgba(0, 0, 137, 0.4);
 }
 
 .timeline-marker::after {
@@ -1333,7 +1341,7 @@ img {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--accent-primary);
+  background: var(--brand-navy);
 }
 
 .timeline-content {
@@ -1514,7 +1522,7 @@ img {
 
 .form-control:focus {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 0 3px rgba(0, 0, 137, 0.2);
   background: var(--bg-card);
 }
 
@@ -1677,7 +1685,7 @@ textarea.form-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 137, 0.4);
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
@@ -1693,7 +1701,7 @@ textarea.form-control {
 
 .back-to-top:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+  box-shadow: 0 8px 25px rgba(0, 0, 137, 0.6);
 }
 
 /* --------------------------------------------------------------------------
