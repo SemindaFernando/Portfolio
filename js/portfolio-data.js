@@ -35,7 +35,7 @@ const portfolioData = {
     email: "semindadewruwan2003@gmail.com",
     phone: "+94 76 465 1136",
     status: "Open to Collaborations & Opportunities",
-    resumeUrl: "assets/Seminda Fernando.pdf",
+    resumeUrl: "assets/Seminda Fernando – .pdf",
     socials: {
       github: "https://github.com/SemindaFernando",
       linkedin: "https://www.linkedin.com/in/semindafernando/",
