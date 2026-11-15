@@ -20,7 +20,20 @@
   <!-- Favicon Icon (Inline SVG) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23000089'/><text x='50%' y='68%' font-size='50' font-family='sans-serif' font-weight='800' fill='white' text-anchor='middle'>P</text></svg>">
 </head>
-<body>
+<body class="is-loading">
+  <!-- Intro / Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-inner">
+      <div class="preloader-logo">
+        <span class="preloader-ring"></span>
+        <span class="preloader-mark">SF</span>
+      </div>
+      <div class="preloader-name">Seminda Fernando</div>
+      <div class="preloader-role">Software Engineering Undergraduate</div>
+      <div class="preloader-bar"><span class="preloader-bar-fill" id="preloader-fill"></span></div>
+    </div>
+  </div>
+
 
   <!-- Background Ambient Glowing Orbs -->
   <div class="ambient-orb ambient-orb-1"></div>
@@ -285,8 +298,14 @@
         <p class="section-subtitle">My professional journey and key engineering milestones.</p>
       </div>
 
-      <div class="timeline-container" id="timeline-container">
-        <!-- Dynamic Timeline Items Rendered via JS -->
+      <h3 class="timeline-group-title">Experience</h3>
+      <div class="timeline-container" id="timeline-experience">
+        <!-- Rendered via JS from portfolioData.experience -->
+      </div>
+
+      <h3 class="timeline-group-title">Education</h3>
+      <div class="timeline-container" id="timeline-education">
+        <!-- Rendered via JS from portfolioData.education -->
       </div>
     </div>
   </section>
@@ -450,6 +469,21 @@
   <script src="js/portfolio-data.js"></script>
   <script src="js/main.js"></script>
   <script>
+    // Intro animation: show for at least 1.8s, then reveal the portfolio once everything has loaded
+    (function () {
+      var pre = document.getElementById('preloader');
+      if (!pre) return;
+      var start = Date.now(), MIN = 1800, done = false;
+      function hide() {
+        if (done) return; done = true;
+        pre.classList.add('preloader-hide');
+        document.body.classList.remove('is-loading');
+        setTimeout(function () { pre.remove(); }, 900);
+      }
+      function ready() { setTimeout(hide, Math.max(0, MIN - (Date.now() - start))); }
+      if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready);
+      setTimeout(hide, 6000); // safety net if something is slow to load
+    })();
     document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 </body>

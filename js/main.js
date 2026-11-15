@@ -462,11 +462,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Render Timeline
- // Render Timeline
-const timelineContainer = document.getElementById('timeline-container');
-if (timelineContainer && data.timeline) {
-  timelineContainer.innerHTML = data.timeline.map(item => `
+  // Render Experience & Education timelines
+  function renderTimeline(containerId, items) {
+    const el = document.getElementById(containerId);
+    if (!el || !items) return;
+    el.innerHTML = items.map(item => `
     <div class="timeline-item">
       <div class="timeline-marker"></div>
       <div class="glass-card timeline-content">
@@ -483,12 +483,11 @@ if (timelineContainer && data.timeline) {
           ${item.achievements.map(ach => `<li>${ach}</li>`).join('')}
         </ul>` : ''}
 
-        ${item.extracurricular ? `
+        ${item.roles ? `
         <div class="timeline-extra">
-          <h4 class="timeline-extra-title">${item.extracurricular.title}</h4>
-          <div class="timeline-extra-org">${item.extracurricular.organization}</div>
+          <h4 class="timeline-extra-title">${item.roles.title}</h4>
           <ul class="timeline-extra-list">
-            ${item.extracurricular.activities.map(a => `
+            ${item.roles.items.map(a => `
               <li>
                 <span class="extra-role">${a.role}</span>
                 <span class="extra-period">${a.period}</span>
@@ -498,7 +497,9 @@ if (timelineContainer && data.timeline) {
       </div>
     </div>
   `).join('');
-}
+  }
+  renderTimeline('timeline-experience', data.experience);
+  renderTimeline('timeline-education', data.education);
 
   /* --------------------------------------------------------------------------
      5. Project Details Modal

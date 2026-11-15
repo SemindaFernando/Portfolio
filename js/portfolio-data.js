@@ -224,40 +224,57 @@ const portfolioData = {
     }
   ],
 
-  // Career Experience & Education Timeline
-  timeline: [
+  // Experience Timeline (add internships, jobs, freelance work, leadership roles here)
+  experience: [
     {
-  label: "Higher Education",
-  period: "2023 - Present",
-  role: "BSc (Hons) in Software Engineering Student",
-  company: "SLTC Research University",
-  description: "Currently pursuing a BSc (Hons) in Software Engineering, building knowledge in software development, mobile applications, and modern web technologies.",
-
-  achievements: [
-    "Building practical experience through academic and personal software development projects.",
-    "Exploring full-stack development, mobile application development, and AI-powered solutions."
+      label: "Internship",
+      period: "October 2026 - Present",
+      role: "Software Engineer Intern",
+      company: "Genex",
+      description: "Currently working as a Software Engineer Intern at Genex.",
+      achievements: []
+    },
+    {
+      label: "Leadership",
+      period: "October 2023 - Present",
+      role: "Vice President",
+      company: "SLTC Media Unit",
+      description: "Part of the SLTC Media Unit since October 2023, progressing from a photography committee member to Vice President.",
+      achievements: [],
+      roles: {
+        title: "Role Progression",
+        items: [
+          { role: "Vice President", period: "July 2026 - Present" },
+          { role: "Deputy Head Of Photography", period: "May 2025 - July 2026" },
+          { role: "Member of Photography Committee", period: "October 2023 - August 2025" }
+        ]
+      }
+    }
+    /* Template for another entry:
+    ,{
+      label: "Internship",
+      period: "Jan 2026 - Jun 2026",
+      role: "Software Engineering Intern",
+      company: "Company Name",
+      description: "What you worked on.",
+      achievements: ["Achievement one", "Achievement two"]
+    }
+    */
   ],
 
-  extracurricular: {
-    title: "Extracurricular Activities",
-    organization: "SLTC Media Unit",
-    activities: [
-      {
-        role: "Vice President",
-        period: "July 2026 - Present"
-      },
-      {
-        role: "Deputy Head Of Photography",
-        period: "May 2025 - July 2026"
-      },
-      {
-        role: "Member of Photography Committee",
-        period: "October 2023 - August 2025"
-      }
-    ]
-  }
-},
-    
+  // Education Timeline
+  education: [
+    {
+      label: "Higher Education",
+      period: "2023 - Present",
+      role: "BSc (Hons) in Software Engineering Student",
+      company: "SLTC Research University",
+      description: "Currently pursuing a BSc (Hons) in Software Engineering, building knowledge in software development, mobile applications, and modern web technologies.",
+      achievements: [
+        "Building practical experience through academic and personal software development projects.",
+        "Exploring full-stack development, mobile application development, and AI-powered solutions."
+      ]
+    },
     {
       label: "School Education",
       period: "2012-2021",
@@ -265,11 +282,9 @@ const portfolioData = {
       company: "G/Karandeniya Central Collage",
       description: "Completed school education from 2012 to 2021, including the G.C.E. Ordinary Level and Advanced Level examinations.",
       achievements: [
-                      "Completed the G.C.E. Advanced Level (A/L) examination in 2021 under the Technology stream.",
-                      "Completed G.C.E. Ordinary Level (O/L) examination in 2018.",
-                      
-]
-      
+        "Completed the G.C.E. Advanced Level (A/L) examination in 2021 under the Technology stream.",
+        "Completed G.C.E. Ordinary Level (O/L) examination in 2018."
+      ]
     }
   ]
 };
