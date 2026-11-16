@@ -189,7 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(typeLoop, typeSpeed);
     }
 
-    typeLoop();
+    if (document.body.classList.contains('is-loading')) {
+      document.addEventListener('intro:done', () => setTimeout(typeLoop, 900), { once: true });
+    } else {
+      typeLoop();
+    }
   }
 
   /* --------------------------------------------------------------------------

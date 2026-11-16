@@ -18,22 +18,25 @@
   <link rel="stylesheet" href="css/style.css">
   
   <!-- Favicon Icon (Inline SVG) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23000089'/><text x='50%' y='68%' font-size='50' font-family='sans-serif' font-weight='800' fill='white' text-anchor='middle'>P</text></svg>">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
 </head>
 <body class="is-loading">
   <!-- Intro / Preloader -->
   <div class="preloader" id="preloader" aria-hidden="true">
-    <div class="preloader-inner">
-      <div class="preloader-logo">
-        <span class="preloader-ring"></span>
-        <span class="preloader-mark">SF</span>
+    <div class="pre-curtain">
+      <div class="pre-meta pre-meta-l"><span>Portfolio</span><span>2026</span></div>
+      <div class="pre-meta pre-meta-r"><span>Software</span><span>Engineering</span></div>
+      <div class="pre-center">
+        <div class="pre-logo"><img src="assets/logo.png" alt="" width="72" height="72"></div>
+        <div class="pre-words">
+          <div class="pre-line"><span style="--d:0">Seminda</span></div>
+          <div class="pre-line"><span style="--d:1" class="pre-grad">Fernando</span></div>
+        </div>
       </div>
-      <div class="preloader-name">Seminda Fernando</div>
-      <div class="preloader-role">Software Engineering Undergraduate</div>
-      <div class="preloader-bar"><span class="preloader-bar-fill" id="preloader-fill"></span></div>
+      <div class="pre-count"><span id="pre-count">0</span><small>%</small></div>
+      <div class="pre-bar"><span id="preloader-fill"></span></div>
     </div>
   </div>
-
 
   <!-- Background Ambient Glowing Orbs -->
   <div class="ambient-orb ambient-orb-1"></div>
@@ -42,13 +45,10 @@
   <!-- Interactive Particle Background Canvas -->
   <canvas id="bg-canvas"></canvas>
 
-  <!-- ========================================================================
-       1. Navigation Bar
-       ======================================================================== -->
   <header class="navbar" id="navbar">
     <div class="container nav-container">
       <a href="#home" class="brand-logo" aria-label="Home">
-        <span class="brand-icon" data-bind="initials">SF</span>
+        <span class="brand-icon"><img src="assets/logo.png" alt="Seminda Fernando logo" width="40" height="40"></span>
         <span class="brand-name" data-bind="name">Seminda Fernando</span>
       </a>
 
@@ -419,7 +419,7 @@
     <div class="container">
       <div class="footer-content">
         <a href="#home" class="brand-logo">
-          <span class="brand-icon" data-bind="initials">SF</span>
+          <span class="brand-icon"><img src="assets/logo.png" alt="Seminda Fernando logo" width="40" height="40"></span>
           <span class="brand-name" data-bind="name">Seminda Fernando</span>
         </a>
 
@@ -469,20 +469,48 @@
   <script src="js/portfolio-data.js"></script>
   <script src="js/main.js"></script>
   <script>
-    // Intro animation: show for at least 1.8s, then reveal the portfolio once everything has loaded
+    // Intro: counter + masked title, then a curved curtain sweeps up and the page zooms in
     (function () {
+      // always start at the top (Home), never restore an old scroll position or jump to a #section
+      try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+      if (location.hash) { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+      window.scrollTo(0, 0);
+
       var pre = document.getElementById('preloader');
-      if (!pre) return;
-      var start = Date.now(), MIN = 1800, done = false;
-      function hide() {
-        if (done) return; done = true;
-        pre.classList.add('preloader-hide');
-        document.body.classList.remove('is-loading');
-        setTimeout(function () { pre.remove(); }, 900);
+      if (!pre) { document.body.classList.remove('is-loading'); return; }
+      var countEl = document.getElementById('pre-count');
+      var fill = document.getElementById('preloader-fill');
+      var MIN = 3000, start = performance.now(), loaded = false, shown = 0, finished = false;
+
+      function setProgress(v) {
+        countEl.textContent = Math.round(v);
+        fill.style.transform = 'scaleX(' + (v / 100) + ')';
       }
-      function ready() { setTimeout(hide, Math.max(0, MIN - (Date.now() - start))); }
-      if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready);
-      setTimeout(hide, 6000); // safety net if something is slow to load
+      function finish() {
+        if (finished) return; finished = true;
+        setProgress(100);
+        pre.classList.add('pre-exit');                       // title + counter slide away
+        setTimeout(function () {
+          window.scrollTo(0, 0);
+          pre.classList.add('pre-open');                     // curved curtain sweeps up
+          document.body.classList.remove('is-loading');
+          document.body.classList.add('intro-ready');        // page zooms in, hero animates
+          document.dispatchEvent(new Event('intro:done'));   // starts the typing effect
+          setTimeout(function () { pre.remove(); }, 1600);
+        }, 750);
+      }
+      function tick(now) {
+        if (finished) return;
+        var t = now - start;
+        var target = (loaded && t >= MIN) ? 100 : Math.min(90, 90 * (1 - Math.pow(1 - Math.min(t / 2700, 1), 3)));
+        shown += (target - shown) * 0.08;
+        if (target === 100 && shown > 99.3) return finish();
+        setProgress(shown);
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      if (document.readyState === 'complete') loaded = true; else window.addEventListener('load', function () { loaded = true; });
+      setTimeout(finish, 9000); // safety net (e.g. background tab)
     })();
     document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
