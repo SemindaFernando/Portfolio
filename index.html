@@ -23,18 +23,17 @@
 <body class="is-loading">
   <!-- Intro / Preloader -->
   <div class="preloader" id="preloader" aria-hidden="true">
-    <div class="pre-curtain">
-      <div class="pre-meta pre-meta-l"><span>Portfolio</span><span>2026</span></div>
-      <div class="pre-meta pre-meta-r"><span>Software</span><span>Engineering</span></div>
-      <div class="pre-center">
-        <div class="pre-logo"><img src="assets/logo.png" alt="" width="72" height="72"></div>
-        <div class="pre-words">
-          <div class="pre-line"><span style="--d:0">Seminda</span></div>
-          <div class="pre-line"><span style="--d:1" class="pre-grad">Fernando</span></div>
-        </div>
+    <div class="pre-stage">
+      <div class="pre-logo">
+        <svg class="pre-ring" viewBox="0 0 100 100">
+          <circle class="pre-ring-track" cx="50" cy="50" r="46"></circle>
+          <circle class="pre-ring-fill" id="pre-ring-fill" cx="50" cy="50" r="46"></circle>
+        </svg>
+        <img src="assets/logo.png" alt="" width="64" height="64">
       </div>
-      <div class="pre-count"><span id="pre-count">0</span><small>%</small></div>
-      <div class="pre-bar"><span id="preloader-fill"></span></div>
+      <div class="pre-name">Seminda Fernando</div>
+      <div class="pre-role">Software Engineering Undergraduate</div>
+      <div class="pre-percent"><span id="pre-count">0</span>%</div>
     </div>
   </div>
 
@@ -468,8 +467,9 @@
   <!-- Scripts -->
   <script src="js/portfolio-data.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/cursor.js"></script>
   <script>
-    // Intro: counter + masked title, then a curved curtain sweeps up and the page zooms in
+    // Intro: logo + progress ring, then the screen closes like an iris onto the logo and the page animates in
     (function () {
       // always start at the top (Home), never restore an old scroll position or jump to a #section
       try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
@@ -479,31 +479,32 @@
       var pre = document.getElementById('preloader');
       if (!pre) { document.body.classList.remove('is-loading'); return; }
       var countEl = document.getElementById('pre-count');
-      var fill = document.getElementById('preloader-fill');
-      var MIN = 3000, start = performance.now(), loaded = false, shown = 0, finished = false;
+      var ring = document.getElementById('pre-ring-fill');
+      var C = 2 * Math.PI * 46;
+      var MIN = 2000, start = performance.now(), loaded = false, shown = 0, finished = false;
 
       function setProgress(v) {
         countEl.textContent = Math.round(v);
-        fill.style.transform = 'scaleX(' + (v / 100) + ')';
+        ring.style.strokeDashoffset = C * (1 - v / 100);
       }
       function finish() {
         if (finished) return; finished = true;
         setProgress(100);
-        pre.classList.add('pre-exit');                       // title + counter slide away
+        pre.classList.add('pre-exit');                       // text fades, logo pulses
         setTimeout(function () {
           window.scrollTo(0, 0);
-          pre.classList.add('pre-open');                     // curved curtain sweeps up
+          pre.classList.add('pre-open');                     // iris closes onto the logo
           document.body.classList.remove('is-loading');
-          document.body.classList.add('intro-ready');        // page zooms in, hero animates
+          document.body.classList.add('intro-ready');        // page animates in
           document.dispatchEvent(new Event('intro:done'));   // starts the typing effect
-          setTimeout(function () { pre.remove(); }, 1600);
-        }, 750);
+          setTimeout(function () { pre.remove(); }, 1300);
+        }, 500);
       }
       function tick(now) {
         if (finished) return;
         var t = now - start;
-        var target = (loaded && t >= MIN) ? 100 : Math.min(90, 90 * (1 - Math.pow(1 - Math.min(t / 2700, 1), 3)));
-        shown += (target - shown) * 0.08;
+        var target = (loaded && t >= MIN) ? 100 : Math.min(90, 90 * (1 - Math.pow(1 - Math.min(t / 1800, 1), 3)));
+        shown += (target - shown) * 0.1;
         if (target === 100 && shown > 99.3) return finish();
         setProgress(shown);
         requestAnimationFrame(tick);
