@@ -366,9 +366,9 @@ img {
 }
 
 .brand-name {
-  font-family: 'Drupadi', 'Plus Jakarta Sans', sans-serif;
-  font-weight: 400;
-  letter-spacing: 0;
+  font-family: 'Sora', 'Plus Jakarta Sans', -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 
@@ -671,6 +671,31 @@ img {
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   position: relative;
+  animation: codeCardGlow 4s ease-in-out infinite alternate;
+}
+
+.hero-code-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -20%;
+  height: 18%;
+  background: linear-gradient(180deg, transparent, rgba(56, 189, 248, 0.12), transparent);
+  pointer-events: none;
+  animation: codeScan 4.5s ease-in-out infinite;
+}
+
+@keyframes codeCardGlow {
+  from { box-shadow: var(--shadow-lg), 0 0 18px rgba(56, 189, 248, 0.08); }
+  to { box-shadow: var(--shadow-lg), 0 0 30px rgba(56, 189, 248, 0.22); }
+}
+
+@keyframes codeScan {
+  0%, 12% { transform: translateY(-40%); opacity: 0; }
+  30% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translateY(720%); opacity: 0; }
 }
 
 .code-header {
@@ -712,6 +737,38 @@ img {
 
 .code-line {
   display: block;
+  opacity: 0;
+  transform: translateX(-8px);
+  animation: codeLineIn 0.45s ease forwards;
+}
+
+.code-line:nth-child(1) { animation-delay: 0.15s; }
+.code-line:nth-child(2) { animation-delay: 0.28s; }
+.code-line:nth-child(3) { animation-delay: 0.41s; }
+.code-line:nth-child(4) { animation-delay: 0.54s; }
+.code-line:nth-child(5) { animation-delay: 0.67s; }
+.code-line:nth-child(6) { animation-delay: 0.80s; }
+.code-line:nth-child(7) { animation-delay: 0.93s; }
+.code-line:nth-child(8) { animation-delay: 1.06s; }
+.code-line:nth-child(9) { animation-delay: 1.19s; }
+.code-line:nth-child(10) { animation-delay: 1.32s; }
+.code-line:nth-child(11) { animation-delay: 1.45s; }
+
+.code-caret {
+  display: inline-block;
+  width: 7px;
+  height: 1em;
+  margin-left: 5px;
+  vertical-align: -2px;
+  background: var(--accent-cyan);
+  animation: blinkCursor 0.8s steps(1) infinite;
+}
+
+@keyframes codeLineIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .token-keyword { color: #f43f5e; }
@@ -1004,9 +1061,9 @@ img {
    7. Skills Section
    -------------------------------------------------------------------------- */
 .skills-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .skill-category-card {
@@ -1149,8 +1206,8 @@ img {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 2.5rem;
 }
 
 .project-card {
@@ -1158,7 +1215,17 @@ img {
   flex-direction: column;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  border: 1px solid rgba(56, 189, 248, 0.55);
+  outline: 2px solid rgba(56, 189, 248, 0.3);
+  outline-offset: 5px;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.08), 0 18px 40px rgba(0, 0, 0, 0.32);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), outline-color var(--transition-normal);
+}
+
+.project-card:hover {
+  border-color: rgba(56, 189, 248, 0.85);
+  outline-color: rgba(56, 189, 248, 0.72);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.14), 0 22px 48px rgba(0, 0, 0, 0.42);
 }
 
 .project-thumbnail {
@@ -2574,6 +2641,8 @@ body.is-loading .navbar, body.is-loading .hero-content > *, body.is-loading .her
 
 @media (prefers-reduced-motion: reduce) {
   .preloader *, .intro-ready *, .intro-ready { animation-duration: 0.01s !important; animation-delay: 0s !important; }
+  .hero-code-card::after { display: none; }
+  .code-line { opacity: 1; transform: none; }
 }
 
 /* ---- Logo image (replaces the "SF" text badge) ---- */
@@ -2584,6 +2653,28 @@ body.is-loading .navbar, body.is-loading .hero-content > *, body.is-loading .her
 @media (max-width: 768px) { .brand-icon { width: 32px; height: 32px; } }
 @media (max-width: 576px) { .brand-icon { width: 30px; height: 30px; } }
 
-/* ---- Cursor comet tail (js/cursor.js) ---- */
-.cursor-tail { position: fixed; top: 0; left: 0; z-index: 10001; pointer-events: none; }
-@media (hover: none), (pointer: coarse) { .cursor-tail { display: none !important; } }
+/* ---- Simple cursor circle (js/cursor.js) ---- */
+.cursor-follow { position: fixed; top: 0; left: 0; z-index: 10001; pointer-events: none; width: 28px; height: 28px; border-radius: 50%; opacity: 0;
+  border: 1.5px solid rgba(56, 189, 248, 0.9); background: rgba(59, 130, 246, 0.12); box-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
+  transition: opacity 0.3s, width 0.25s ease, height 0.25s ease, background 0.25s ease; will-change: transform; }
+.cursor-follow.is-on { opacity: 1; }
+.cursor-follow.is-hover { width: 52px; height: 52px; background: rgba(59, 130, 246, 0.2); }
+.cursor-follow.is-down { width: 20px; height: 20px; }
+@media (hover: none), (pointer: coarse) { .cursor-follow { display: none !important; } }
+
+/* ---- Skills: two auto-scrolling rows ---- */
+.skills-marquee { position: relative; overflow: hidden; padding: 0.75rem 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%); }
+.skills-track { display: flex; width: max-content; align-items: stretch;
+  animation: skillsLeft calc(var(--cards, 4) * 12s) linear infinite; will-change: transform; }
+.skills-marquee.to-right .skills-track { animation-name: skillsRight; }
+.skills-marquee:hover .skills-track { animation-play-state: paused; }
+.skills-track .skill-category-card { flex: 0 0 auto; width: 360px; margin-right: 1.5rem; }
+@keyframes skillsLeft  { from { transform: translateX(0); } to { transform: translateX(-33.3333%); } }
+@keyframes skillsRight { from { transform: translateX(-33.3333%); } to { transform: translateX(0); } }
+@media (max-width: 576px) { .skills-track .skill-category-card { width: 300px; padding: 1.5rem; } }
+@media (prefers-reduced-motion: reduce) {
+  .skills-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .skills-track { animation: none; }
+}

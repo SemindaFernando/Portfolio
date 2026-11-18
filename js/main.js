@@ -353,10 +353,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return '<span class="skill-icon-dot"></span>';
   }
 
-  // Render Skills
+  // Render Skills: two auto-scrolling rows (top row moves right, bottom row moves left)
   const skillsContainer = document.getElementById('skills-container');
   if (skillsContainer && data.skills) {
-    skillsContainer.innerHTML = data.skills.map(cat => `
+    const skillCard = cat => `
       <div class="glass-card skill-category-card">
         <div class="skill-category-header">
           <div class="skill-category-icon">
@@ -376,8 +376,23 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           `).join('')}
         </div>
-      </div>
-    `).join('');
+      </div>`;
+
+    const half = Math.ceil(data.skills.length / 2);
+    const rows = [
+      { cats: data.skills.slice(0, half), dir: 'to-right' },
+      { cats: data.skills.slice(half), dir: 'to-left' }
+    ].filter(r => r.cats.length);
+
+    skillsContainer.innerHTML = rows.map(row => {
+      const one = row.cats.map(skillCard).join('');
+      // 3 copies so the loop is seamless even on very wide screens
+      const track = one + one + one;
+      return `
+        <div class="skills-marquee ${row.dir}" style="--cards:${row.cats.length}">
+          <div class="skills-track">${track}</div>
+        </div>`;
+    }).join('');
   }
 
   // Render Projects
@@ -614,7 +629,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* --------------------------------------------------------------------------
-     7. Contact Form Submission (Client Simulation)
+     7. Contact Form Submission
      -------------------------------------------------------------------------- */
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
@@ -623,6 +638,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const nameInput = document.getElementById('contact-name');
       const emailInput = document.getElementById('contact-email');
+      const subjectInput = document.getElementById('contact-subject');
       const msgInput = document.getElementById('contact-message');
       const submitBtn = document.getElementById('contact-submit-btn');
 
@@ -637,23 +653,24 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Simulated sending state
-      const originalText = submitBtn.innerHTML;
+      const recipient = data.personal?.email || 'semindadewruwan2003@gmail.com';
+      const subject = subjectInput.value.trim() || `Portfolio enquiry from ${nameInput.value.trim()}`;
+      const body = [
+        `Name: ${nameInput.value.trim()}`,
+        `Email: ${emailInput.value.trim()}`,
+        '',
+        msgInput.value.trim()
+      ].join('\n');
+
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `
-        <svg class="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
-          <path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="0.75"></path>
-        </svg>
-        Sending...
-      `;
+      showToast('Opening your email app...');
+
+      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
       setTimeout(() => {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        showToast('Message sent! Thank you, I will reply soon.');
         contactForm.reset();
-      }, 1000);
+      }, 800);
     });
   }
 
